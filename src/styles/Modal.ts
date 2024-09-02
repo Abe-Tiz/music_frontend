@@ -27,7 +27,7 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalBody = styled.div`
-  padding: 1rem;
+  padding: 0 1rem;
 
   form {
     display: grid;
@@ -64,9 +64,13 @@ export const CloseButton = styled.button`
   padding: 8px;
   font-size: 20px;
   font-weight: bold;
+  margin-top: -6rem;
+  margin-right: -2rem;
 `;
 
 export const ModalTitle = styled.h2`
   font-size: 25px;
   font-family: sans-serif;
+  text-align: start;
+  /* margin-bottom: 2rem; */
 `
