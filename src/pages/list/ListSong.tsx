@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSong, fetchSongs, fetchSongsByGenre } from "../../redux/songSlice";
 import { Song } from "../../redux/types";
-import { EditButton, FilterLabel, FilterLabelLeft, FilterOption, FilterSelect, ListContainer, ListHeader, MusicList, SongContainer, SongList } from "./List";
+import { EditButton, FilterLabel, FilterLabelLeft, FilterOption, FilterSelect, ListContainer, ListHeader, MusicList, SongContainer, SongList, Spinner, SpinnerContainer } from "./List";
 import { HiMusicalNote } from "react-icons/hi2";
 import EditModal from "../../components/EditModal";
 import { RootState } from "../../redux/store";
@@ -18,7 +18,7 @@ const ListSong: React.FC = () => {
   const genres = ["Traditional", "Pop", "Reggae", "cork", "Folk", "Jazz", "Rock"]; 
   
   const dispatch = useDispatch();
-  const songs = useSelector((state: RootState) => state.songs.songs);
+   const { songs, loading } = useSelector((state: RootState) => state.songs);
 
   useEffect(() => { 
         if (selectedGenre) {
@@ -62,12 +62,9 @@ const ListSong: React.FC = () => {
   return (
     <>
       <ListContainer>
-
         {/* filter  and statistics button  */}
         <ListHeader>
-          <FilterLabelLeft to="/statistics" >
-            Statistics
-          </FilterLabelLeft>
+          <FilterLabelLeft to="/statistics">Statistics</FilterLabelLeft>
           <FilterLabel>
             Filter by Genre:
             <FilterSelect value={selectedGenre} onChange={handleGenreChange}>
@@ -83,31 +80,36 @@ const ListSong: React.FC = () => {
 
         {/* list of songs */}
         <SongContainer>
-          {songs.map((song: Song, index: number) => (
-            <SongList key={index}>
-              <MusicList>
-                {" "}
-                <HiMusicalNote style={{ marginRight: "5px", color: "white" }} />
-                {song.title} - {song.artist}
-              </MusicList>
+          {loading ? (
+            <SpinnerContainer>
+              <Spinner />
+            </SpinnerContainer>
+          ) : (
+            songs.map((song: Song, index: number) => (
+              <SongList key={index}>
+                <MusicList>
+                  {" "}
+                  <HiMusicalNote
+                    style={{ marginRight: "5px", color: "white" }}
+                  />
+                  {song.title} - {song.artist}
+                </MusicList>
 
-              <div>
-                <EditButton onClick={() => handleEdit(song)}>Edit</EditButton>
-                <EditButton onClick={() => handleDelete(song._id)}>
-                  delete
-                </EditButton>
-              </div>
-            </SongList>
-          ))}
+                <div>
+                  <EditButton onClick={() => handleEdit(song)}>Edit</EditButton>
+                  <EditButton onClick={() => handleDelete(song._id)}>
+                    delete
+                  </EditButton>
+                </div>
+              </SongList>
+            ))
+          )}
         </SongContainer>
       </ListContainer>
 
       {/* display edit modal */}
       {isEditModalOpen && (
-        <EditModal
-          setIsModalOpen={setIsEditModalOpen}
-          song={selectedSong} 
-        />
+        <EditModal setIsModalOpen={setIsEditModalOpen} song={selectedSong} />
       )}
 
       {/* display the delete confimation message */}
