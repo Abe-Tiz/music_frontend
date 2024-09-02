@@ -25,20 +25,24 @@ const Modal: React.FC<ModalProps> = ({ setIsModalOpen }) => {
   const [errors, setErrors] = useState<string[]>([]);
 
   // Zod schema for form validation
-  const songSchema = z.object({
-    title: z.string().min(1, "Title is required"),
-    album: z.string().min(1, "Album is required"),
-    artist: z.string().min(1, "Artist is required"),
-    genre: z.enum([
-      "Rock",
-      "Pop",
-      "Jazz",
-      "Traditional",
-      "Reggae",
-      "cork",
-      "Folk",
-    ]),
-  });
+ const nonNumericString = z.string().refine((val) => {
+   return /^[a-zA-Z\s]+$/.test(val);
+ }, "Invalid input: only alphabetic characters and spaces are allowed");
+
+ const songSchema = z.object({
+   title: nonNumericString,
+   album: nonNumericString,
+   artist: nonNumericString,
+   genre: z.enum([
+     "Rock",
+     "Pop",
+     "Jazz",
+     "Traditional",
+     "Reggae",
+     "cork",
+     "Folk",
+   ]),
+ });
 
   // handle close events
   const handleClose = () => {

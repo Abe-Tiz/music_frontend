@@ -13,7 +13,7 @@ import {
   Cell,
 } from "recharts";
 import { ChartContainer, Title } from "../../styles/BarGraph";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTotalAlbumsStart, fetchTotalArtistsStart, fetchTotalGenresStart, fetchTotalSongsStart } from "../../redux/statSlice";
 import { fetchTotalSongsGenreRequest } from "../../redux/songAlbumSlice";
@@ -89,7 +89,7 @@ const BarGraph: React.FC = () => {
               fill="#8884d8"
               label
             >
-              {totalSongByGenre.map((entry:string,index:number) => (
+              {totalSongByGenre.map((_entry,index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

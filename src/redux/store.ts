@@ -8,12 +8,15 @@ import albumReducer from "./songAlbumSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
-// combile all reducers
+// Combine all reducers
 const rootReducer = combineReducers({
   songs: songsReducer,
   stat: statReducer,
   album: albumReducer,
 });
+
+// Define and export RootState
+export type RootState = ReturnType<typeof rootReducer>;
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -21,5 +24,5 @@ export const store = configureStore({
     getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-// run saga middleware
+// Run saga middleware
 sagaMiddleware.run(rootSaga);

@@ -5,13 +5,13 @@ import { Song } from "../../redux/types";
 import { EditButton, FilterLabel, FilterLabelLeft, FilterOption, FilterSelect, ListContainer, ListHeader, MusicList, SongContainer, SongList } from "./List";
 import { HiMusicalNote } from "react-icons/hi2";
 import EditModal from "../../components/EditModal";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "../../redux/store";
 import ConfirmationModal from "../../components/ConfirmationModal";
 
 const ListSong: React.FC = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
-  const [selectedGenre, setSelectedGenre] = useState<string>(""); 
+  const [selectedGenre, setSelectedGenre] = useState(""); 
    const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState<boolean>(false);
   const [songToDelete, setSongToDelete] = useState<string | null>(null);
   
@@ -24,13 +24,12 @@ const ListSong: React.FC = () => {
         if (selectedGenre) {
           dispatch(fetchSongsByGenre(selectedGenre));
         } else {
-          dispatch(fetchSongsByGenre(""));
           dispatch(fetchSongs());
         }
   }, [dispatch, selectedGenre]);
 
   // handle delete opration
-   const handleDelete = (id: string) => {
+   const handleDelete = (id:string) => {
      setSongToDelete(id);
      setIsConfirmDeleteOpen(true);
   };
@@ -56,7 +55,7 @@ const ListSong: React.FC = () => {
     setIsEditModalOpen(true);
   };
 
-   const handleGenreChange = (e) => {
+   const handleGenreChange = (e:any) => {
      setSelectedGenre(e.target.value);  
    };
 

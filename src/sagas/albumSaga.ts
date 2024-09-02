@@ -6,43 +6,44 @@ import {
   fetchTotalSongsAlbumArtistRequest,
   fetchTotalSongsFailure,
   fetchTotalSongsGenreFailure,
-  fetchTotalSongsGenreRequest, 
+  fetchTotalSongsGenreRequest,
   fetchTotalSongsGenreSuccess,
   fetchTotalSongsRequest,
-  fetchTotalSongsSuccess
+  fetchTotalSongsSuccess,
 } from "../redux/songAlbumSlice";
- 
+
 // songs in album
-function* fetchTotalSongsSaga() {
+function* fetchTotalSongsSaga(): Generator{
   try {
-    const response:string = yield call(axios.get,
-      "https://music-backend-t7zo.onrender.com/song/total-song-album"
-    ); 
-    yield put(fetchTotalSongsSuccess(response.data));  
+    const response = yield call(
+      axios.get,
+      "http://localhost:3000/song/total-song-album"
+    );
+    yield put(fetchTotalSongsSuccess(response.data));
   } catch (error: any) {
-    yield put(fetchTotalSongsFailure(error.message)); 
+    yield put(fetchTotalSongsFailure(error.message));
   }
 }
 
 // song and album by artist
-function* fetchTotalSongsAlbumArtistSaga() {
+function* fetchTotalSongsAlbumArtistSaga(): Generator {
   try {
-    const response: string = yield call(
+    const response = yield call(
       axios.get,
-      "https://music-backend-t7zo.onrender.com/song/total-song-album-artist"
+      "http://localhost:3000/song/total-song-album-artist"
     );
-    yield put(fetchTotalSongsAlbumArtisSuccess(response.data));  
+    yield put(fetchTotalSongsAlbumArtisSuccess(response.data));
   } catch (error: any) {
-    yield put(fetchTotalSongsAlbumArtisFailure(error.message));  
+    yield put(fetchTotalSongsAlbumArtisFailure(error.message));
   }
 }
 
 // songs by genre
-function* fetchTotalSongsGenreSaga() {
+function* fetchTotalSongsGenreSaga(): Generator {
   try {
-    const response: string = yield call(
+    const response = yield call(
       axios.get,
-      "https://music-backend-t7zo.onrender.com/song/total-song-genre"
+      "http://localhost:3000/song/total-song-genre"
     );
     yield put(fetchTotalSongsGenreSuccess(response.data));
   } catch (error: any) {
@@ -51,7 +52,10 @@ function* fetchTotalSongsGenreSaga() {
 }
 
 export function* albumSaga() {
-    yield takeLatest(fetchTotalSongsRequest.type, fetchTotalSongsSaga);
-    yield takeLatest(fetchTotalSongsAlbumArtistRequest.type, fetchTotalSongsAlbumArtistSaga);
-    yield takeLatest(fetchTotalSongsGenreRequest.type,fetchTotalSongsGenreSaga);
+  yield takeLatest(fetchTotalSongsRequest.type, fetchTotalSongsSaga);
+  yield takeLatest(
+    fetchTotalSongsAlbumArtistRequest.type,
+    fetchTotalSongsAlbumArtistSaga
+  );
+  yield takeLatest(fetchTotalSongsGenreRequest.type, fetchTotalSongsGenreSaga);
 }

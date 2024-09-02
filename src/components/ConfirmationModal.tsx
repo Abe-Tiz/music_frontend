@@ -8,6 +8,10 @@ interface ConfirmationModalProps {
   onCancel: () => void;
 }
 
+interface ButtonProps {
+  isConfirm?: boolean;  
+}
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -29,7 +33,8 @@ const ModalContainer = styled.div`
   text-align: center;
 `;
 
-const Button = styled.button`
+const Button =
+  styled.button <ButtonProps>`
   margin: 0 10px;
   padding: 10px 20px;
   border: none;
@@ -53,8 +58,10 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     <ModalOverlay>
       <ModalContainer>
         <p>{message}</p>
-        <Button onClick={onCancel}>Cancel</Button>
-        <Button isConfirm onClick={onConfirm}>
+        <Button isConfirm={true} onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button isConfirm={false} onClick={onConfirm}>
           Delete
         </Button>
       </ModalContainer>

@@ -5,7 +5,7 @@ import {
   fetchTotalSongsGenreRequest,
   fetchTotalSongsRequest,
 } from "../../redux/songAlbumSlice";
-import { RootState } from "../../store";
+import { RootState } from "../../redux/store";
 import {
   PieChart,
   Pie,
@@ -60,10 +60,11 @@ const AlbumList: React.FC = () => {
               fill="#8884d8"
               label
             >
-              {totalSongByAlbum.map((entry, index) => (
+              {totalSongByAlbum.map((_entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
+                  
                 />
               ))}
             </Pie>
