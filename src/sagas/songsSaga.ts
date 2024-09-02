@@ -110,7 +110,7 @@ function* fetchSongsByGenreAsync(action: CreateSongAction):Generator {
       "https://music-backend-t7zo.onrender.com/song/filter-artist-genre",
       { genre: action.payload }
     );
-    yield put(fetchSongsByGenreSuccess(response.data)); // Assuming response.data contains the filtered songs
+    yield put(fetchSongsByGenreSuccess(response.data)); 
   } catch (error:any) {
     yield put(fetchSongsByGenreFailure(error.message));
   }
