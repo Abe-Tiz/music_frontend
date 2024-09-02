@@ -11,9 +11,9 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 const ListSong: React.FC = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
-  const [selectedGenre, setSelectedGenre] = useState(""); 
+  const [selectedGenre, setSelectedGenre] = useState(); 
    const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState<boolean>(false);
-  const [songToDelete, setSongToDelete] = useState<string | null>(null);
+  const [songToDelete, setSongToDelete] = useState(null);
   
   const genres = ["Traditional", "Pop", "Reggae", "cork", "Folk", "Jazz", "Rock"]; 
   
@@ -29,7 +29,7 @@ const ListSong: React.FC = () => {
   }, [dispatch, selectedGenre]);
 
   // handle delete opration
-   const handleDelete = (id:string) => {
+   const handleDelete = (id:any) => {
      setSongToDelete(id);
      setIsConfirmDeleteOpen(true);
   };

@@ -37,7 +37,7 @@ interface CreateSongAction {
 // display
 function* fetchSongsSaga(): Generator {
   try {
-    const response = yield call(() => axios.get("http://localhost:3000/song"));
+    const response:any = yield call(() => axios.get("https://music-backend-t7zo.onrender.com/song"));
     yield put(fetchSongsSuccess(response.data));
   } catch (error:any) {
     yield put(fetchSongsFailure(error.message));
@@ -51,9 +51,9 @@ export function* watchFetchSongs() {
 // create
 function* createSongAsync(action: CreateSongAction):Generator {
   try {
-    const response = yield call(
+    const response:any = yield call(
       axios.post,
-      "http://localhost:3000/song/create",
+      "https://music-backend-t7zo.onrender.com/song/create",
       action.payload
     );
     yield put(createSongSuccess(response.data));
@@ -71,7 +71,7 @@ function* deleteSongAsync(action: CreateSongAction) {
   try {
     yield call(
       axios.delete,
-      `http://localhost:3000/song/delete/${action.payload}`
+      `https://music-backend-t7zo.onrender.com/song/delete/${action.payload}`
     );
     yield put(deleteSongSuccess(action.payload));
   } catch (error:any) {
@@ -87,9 +87,9 @@ export function* watchDeleteSong() {
 // update
 function* updateSongAsync(action: CreateSongAction):Generator {
   try {
-    const response = yield call(
+    const response:any = yield call(
       axios.put,
-      `http://localhost:3000/song/update/${action.payload._id}`,
+      `https://music-backend-t7zo.onrender.com/song/update/${action.payload._id}`,
       action.payload
     );
     yield put(updateSongSuccess(response.data));
@@ -105,9 +105,9 @@ export function* watchUpdateSong() {
 // filter
 function* fetchSongsByGenreAsync(action: CreateSongAction):Generator {
   try {
-    const response = yield call(
+    const response:any = yield call(
       axios.post,
-      "http://localhost:3000/song/filter-artist-genre",
+      "https://music-backend-t7zo.onrender.com/song/filter-artist-genre",
       { genre: action.payload }
     );
     yield put(fetchSongsByGenreSuccess(response.data)); // Assuming response.data contains the filtered songs
@@ -124,9 +124,9 @@ export function* watchFetchSongsByGenre() {
 function* fetchTotalSongsSaga(): Generator {
   try {
     yield put(fetchTotalsStart());
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-song"
+      "https://music-backend-t7zo.onrender.com/song/total-song"
     );
     yield put(
       fetchTotalsSuccess({
@@ -145,9 +145,9 @@ function* fetchTotalSongsSaga(): Generator {
 function* fetchTotalArtistsSaga(): Generator {
   try {
     yield put(fetchTotalsStart());
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-artist"
+      "https://music-backend-t7zo.onrender.com/song/total-artist"
     );
     yield put(
       fetchTotalsSuccess({
@@ -166,9 +166,9 @@ function* fetchTotalArtistsSaga(): Generator {
 function* fetchTotalAlbumsSaga(): Generator {
   try {
     yield put(fetchTotalsStart());
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-album"
+      "https://music-backend-t7zo.onrender.com/song/total-album"
     );
     yield put(
       fetchTotalsSuccess({
@@ -187,9 +187,9 @@ function* fetchTotalAlbumsSaga(): Generator {
 function* fetchTotalGenresSaga(): Generator {
   try {
     yield put(fetchTotalsStart());
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-genre"
+      "https://music-backend-t7zo.onrender.com/song/total-genre"
     );
     yield put(
       fetchTotalsSuccess({

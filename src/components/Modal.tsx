@@ -77,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({ setIsModalOpen }) => {
     }
 
     const newSong: newSongs = { title, album, artist, genre };
-    dispatch(createSong(newSong));
+     dispatch(createSong(newSong));
     setIsModalOpen(false);
   };
 

@@ -7,6 +7,13 @@ interface SongsState {
   error: string | null;
 }
 
+interface newSongs {
+  title: string;
+  album: string;
+  artist: string;
+  genre: string;
+}
+
 const initialState: SongsState = {
   songs: [],
   loading: false,
@@ -17,7 +24,6 @@ const songsSlice = createSlice({
   name: "songs",
   initialState,
   reducers: {
-
     // display
     fetchSongs(state) {
       state.loading = true;
@@ -33,7 +39,7 @@ const songsSlice = createSlice({
     },
 
     // create
-    createSong(state) {
+    createSong(state, _action: PayloadAction<newSongs>) {
       state.loading = true;
     },
     createSongSuccess(state, action) {
@@ -85,7 +91,7 @@ const songsSlice = createSlice({
     },
     fetchSongsByGenreSuccess(state, action) {
       state.loading = false;
-      state.songs = action.payload;  
+      state.songs = action.payload;
       state.error = null;
     },
     fetchSongsByGenreFailure(state, action) {

@@ -15,9 +15,9 @@ import {
 // songs in album
 function* fetchTotalSongsSaga(): Generator{
   try {
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-song-album"
+      "https://music-backend-t7zo.onrender.com/song/total-song-album"
     );
     yield put(fetchTotalSongsSuccess(response.data));
   } catch (error: any) {
@@ -28,9 +28,9 @@ function* fetchTotalSongsSaga(): Generator{
 // song and album by artist
 function* fetchTotalSongsAlbumArtistSaga(): Generator {
   try {
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-song-album-artist"
+      "https://music-backend-t7zo.onrender.com/song/total-song-album-artist"
     );
     yield put(fetchTotalSongsAlbumArtisSuccess(response.data));
   } catch (error: any) {
@@ -41,9 +41,9 @@ function* fetchTotalSongsAlbumArtistSaga(): Generator {
 // songs by genre
 function* fetchTotalSongsGenreSaga(): Generator {
   try {
-    const response = yield call(
+    const response:any = yield call(
       axios.get,
-      "http://localhost:3000/song/total-song-genre"
+      "https://music-backend-t7zo.onrender.com/song/total-song-genre"
     );
     yield put(fetchTotalSongsGenreSuccess(response.data));
   } catch (error: any) {
