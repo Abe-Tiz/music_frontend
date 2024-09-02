@@ -43,6 +43,13 @@ const Modal: React.FC<ModalProps> = ({ setIsModalOpen }) => {
      "Folk",
    ]),
  });
+  
+  interface newSongs {
+    title: string;
+    album: string;
+    artist: string;
+    genre : string;
+  }
 
   // handle close events
   const handleClose = () => {
@@ -69,7 +76,7 @@ const Modal: React.FC<ModalProps> = ({ setIsModalOpen }) => {
       return;
     }
 
-    const newSong = { title, album, artist, genre };
+    const newSong: newSongs = { title, album, artist, genre };
     dispatch(createSong(newSong));
     setIsModalOpen(false);
   };
