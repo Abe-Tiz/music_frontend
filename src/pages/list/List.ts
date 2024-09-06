@@ -7,7 +7,7 @@ export const ListContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 20px 65px;
-  margin-top: 2rem;
+  margin-top: 0;
 `;
 
 export const ListHeader = styled.div`
@@ -106,3 +106,21 @@ export const SpinnerContainer = styled.div`
   align-items: center;
   height: 100vh; 
 `;
+
+
+export const VideoPlayer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+   height: 250px;
+   width: 600px;
+  padding: 2px;
+  border: 2px solid gray;
+  border-radius: 12px;
+ margin-bottom: 1rem;
+`;
+
+export const ShowVideo = styled.p`
+
+`
