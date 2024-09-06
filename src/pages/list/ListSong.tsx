@@ -18,7 +18,9 @@ const ListSong: React.FC = () => {
   const [songToDelete, setSongToDelete] = useState(null);
 
    const [videoId, setVideoId] = useState<string | null>(null);
-   const [musicLoading, setMusicLoading] = useState<boolean>(false);
+   const [video, setVideo] = useState<string | null>("Play Video");
+  const [musicLoading, setMusicLoading] = useState<boolean>(false);
+  
   
   const genres = ["Traditional", "Pop", "Reggae", "cork", "Folk", "Jazz", "Rock"]; 
   
@@ -88,9 +90,9 @@ const ListSong: React.FC = () => {
         if (response.data.items.length > 0) {
           const videoId = response.data.items[0].id.videoId;
           setVideoId(videoId); 
-          console.log(videoId);
+          setVideo(null);
         } else {
-          console.error("No video found");
+          setVideo("No video found");
         }
       } catch (error) {
         console.error("Error fetching video:", error);
@@ -126,7 +128,7 @@ const ListSong: React.FC = () => {
             />
           ) : (
             // </VideoPlayer>
-            <ShowVideo>Display Video</ShowVideo>
+            <ShowVideo>{video}</ShowVideo>
           )}
         </VideoPlayer>
 
@@ -163,7 +165,7 @@ const ListSong: React.FC = () => {
                     {" "}
                     <HiMusicalNote
                       style={{ marginRight: "5px", color: "white" }}
-                    />
+                    /> Play
                   </EditButton>
                   {song.title} - {song.artist}
                 </MusicList>
